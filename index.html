@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>翠紅苑 新サイト制作 — ページ一覧</title>
+<style>
+  :root {
+    --green: #2d5a3d;
+    --green-light: #e8f0eb;
+    --crimson: #8b1a2b;
+    --gold: #b8935a;
+    --ink: #1a1a1a;
+    --muted: #6b7280;
+    --border: #d9e2dc;
+    --bg: #f8faf8;
+    --white: #ffffff;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Georgia', serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: var(--green);
+    color: var(--white);
+    padding: 40px 24px 32px;
+    text-align: center;
+  }
+
+  .header-label {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    color: var(--white);
+  }
+
+  header h1 span {
+    display: block;
+    font-size: 13px;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.12em;
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  .header-meta {
+    margin-top: 20px;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* Main */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* Section heading */
+  .section-heading {
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--green);
+    text-transform: uppercase;
+    border-left: 3px solid var(--green);
+    padding-left: 10px;
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+
+  .section-heading:first-of-type { margin-top: 0; }
+
+  /* Card */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(45, 90, 61, 0.1);
+    border-color: var(--green);
+  }
+
+  .card a {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    text-decoration: none;
+    gap: 16px;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  .card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+  }
+
+  .card-url {
+    font-family: 'SFMono-Regular', 'Menlo', monospace;
+    font-size: 11px;
+    color: var(--green);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-arrow {
+    color: var(--border);
+    font-size: 14px;
+    margin-left: 4px;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+
+  .card:hover .card-arrow { color: var(--green); }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .badge-wip {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .badge-review {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  /* Info box */
+  .info-box {
+    background: var(--green-light);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-top: 40px;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .info-box strong {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Client Review Portal</div>
+  <h1>翠紅苑 新サイト制作
+    <span>Suikoen Website Redesign — Page Index</span>
+  </h1>
+  <div class="header-meta">制作担当: 川口直志 &nbsp;|&nbsp; WordPress + SWELL</div>
+</header>
+
+<main>
+
+  <div class="section-heading">情報設計 / Information Architecture</div>
+
+  <div class="card">
+    <a href="https://suikoen-sitemap.pages.dev/" target="_blank" rel="noopener">
+      <div class="card-icon">🗺️</div>
+      <div class="card-body">
+        <div class="card-title"><span class="badge badge-review">確認用</span>サイトマップ（構成案）</div>
+        <div class="card-desc">全体のページ構成・ナビゲーション5項目・各ページの役割を可視化</div>
+      </div>
+      <div class="card-url">suikoen-sitemap.pages.dev</div>
+      <div class="card-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="section-heading">ホームページ構成案 / Homepage Proposals</div>
+
+  <div class="card">
+    <a href="https://suikoen-home.pages.dev/" target="_blank" rel="noopener">
+      <div class="card-icon">🎬</div>
+      <div class="card-body">
+        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 1 — 動画スライダー型ヒーロー</div>
+        <div class="card-desc">夢のつり橋・奥大井湖上駅・温泉の3動画を自動切替。5つの魅力は3カラムカード。</div>
+      </div>
+      <div class="card-url">suikoen-home.pages.dev</div>
+      <div class="card-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="https://suikoen-home-2.pages.dev/" target="_blank" rel="noopener">
+      <div class="card-icon">🖼️</div>
+      <div class="card-body">
+        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 2 — フルブリード写真型ヒーロー</div>
+        <div class="card-desc">静止画1枚でインパクト。5つの魅力はジグザグ交互レイアウト。観光セクションを上位に配置。</div>
+      </div>
+      <div class="card-url">suikoen-home-2.pages.dev</div>
+      <div class="card-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="info-box">
+    <strong>このページについて</strong><br>
+    制作・確認用の作業リンク集です。今後ページが追加されるたびに更新します。<br>
+    各ページはCloudflare Pagesで公開中。本番サイトとは別環境です。
+  </div>
+
+</main>
+
+<footer>
+  翠紅苑 新サイト制作プロジェクト &copy; 2025
+</footer>
+
+</body>
+</html>
