@@ -10,14 +10,13 @@
     --green-mid:   #3d7a54;
     --green-light: #eaf2ec;
     --green-pale:  #f4f8f5;
-    --crimson:     #7a2020;
     --ink:         #1a1a1a;
     --muted:       #6b7280;
     --border:      #dde5df;
     --bg:          #f5f7f5;
     --white:       #ffffff;
     --radius:      5px;
-    --sidebar-w:   220px;
+    --sidebar-w:   224px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
@@ -29,7 +28,7 @@
     flex-direction:column;
   }
 
-  /* ── Top bar ── */
+  /* Top bar */
   .topbar{
     background:var(--green);
     color:#fff;
@@ -39,230 +38,134 @@
     padding:0 24px;
     height:52px;
     flex-shrink:0;
+    position:sticky;
+    top:0;
+    z-index:100;
   }
-  .topbar-title{
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:0.06em;
-  }
-  .topbar-title span{
-    font-size:11px;
-    font-weight:400;
-    opacity:.6;
-    margin-left:12px;
-    letter-spacing:0.08em;
-  }
+  .topbar-title{font-size:14px;font-weight:600;letter-spacing:0.06em;}
+  .topbar-title span{font-size:11px;font-weight:400;opacity:.6;margin-left:12px;letter-spacing:0.08em;}
   .topbar-meta{font-size:11px;opacity:.55;}
 
-  /* ── Layout ── */
-  .layout{
-    display:flex;
-    flex:1;
-    min-height:0;
-  }
+  /* Layout */
+  .layout{display:flex;flex:1;min-height:0;}
 
-  /* ── Sidebar ── */
+  /* Sidebar */
   aside{
     width:var(--sidebar-w);
     flex-shrink:0;
     background:var(--white);
     border-right:1px solid var(--border);
-    padding:20px 0;
+    padding:16px 0 24px;
     position:sticky;
-    top:0;
+    top:52px;
     height:calc(100vh - 52px);
     overflow-y:auto;
   }
   .nav-label{
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:0.14em;
-    color:var(--muted);
-    text-transform:uppercase;
-    padding:14px 18px 6px;
+    font-size:10px;font-weight:700;letter-spacing:0.14em;
+    color:var(--muted);text-transform:uppercase;
+    padding:16px 18px 5px;
   }
-  .nav-label:first-child{padding-top:4px;}
+  .nav-label:first-child{padding-top:6px;}
   .nav-item{
-    display:block;
-    padding:9px 18px;
-    font-size:13px;
-    color:var(--ink);
-    text-decoration:none;
+    display:block;padding:8px 18px;font-size:12.5px;
+    color:var(--ink);text-decoration:none;
     border-left:3px solid transparent;
-    transition:background .12s, border-color .12s;
-    cursor:pointer;
+    transition:background .12s,border-color .12s;
   }
   .nav-item:hover{background:var(--green-light);}
   .nav-item.active{
     background:var(--green-light);
     border-left-color:var(--green);
+    color:var(--green);font-weight:600;
+  }
+  .nav-count{
+    float:right;
+    font-size:10px;
+    background:var(--green-light);
     color:var(--green);
+    padding:1px 6px;
+    border-radius:8px;
     font-weight:600;
   }
+  .nav-divider{height:1px;background:var(--border);margin:10px 14px;}
 
-  /* ── Main ── */
-  main{
-    flex:1;
-    padding:28px 32px 60px;
-    overflow-y:auto;
-  }
+  /* Main */
+  main{flex:1;padding:28px 32px 60px;overflow-y:auto;}
 
   /* Section */
-  .section{
-    margin-bottom:36px;
-    scroll-margin-top:20px;
-  }
+  .section{margin-bottom:40px;scroll-margin-top:20px;}
   .section-header{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:12px;
-    padding-bottom:8px;
-    border-bottom:1px solid var(--border);
+    display:flex;align-items:baseline;gap:10px;
+    margin-bottom:12px;padding-bottom:8px;
+    border-bottom:2px solid var(--green-light);
   }
-  .section-header h2{
-    font-size:14px;
-    font-weight:700;
-    color:var(--green);
-    letter-spacing:0.06em;
-  }
-  .section-count{
-    font-size:11px;
-    color:var(--muted);
-  }
+  .section-header h2{font-size:13px;font-weight:700;color:var(--green);letter-spacing:0.06em;}
+  .section-count{font-size:11px;color:var(--muted);}
 
   /* Page list */
-  .page-list{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
+  .page-list{display:flex;flex-direction:column;gap:6px;}
   .page-row{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    display:flex;
-    align-items:center;
-    gap:0;
-    overflow:hidden;
-    transition:box-shadow .15s, border-color .15s;
+    background:var(--white);border:1px solid var(--border);
+    border-radius:var(--radius);display:flex;align-items:stretch;
+    overflow:hidden;transition:box-shadow .15s,border-color .15s;
   }
-  .page-row:hover{
-    border-color:var(--green-mid);
-    box-shadow:0 2px 8px rgba(45,90,61,.1);
-  }
+  .page-row:hover{border-color:var(--green-mid);box-shadow:0 2px 8px rgba(45,90,61,.1);}
   .page-row-icon{
-    width:44px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:17px;
-    align-self:stretch;
-    background:var(--green-pale);
-    border-right:1px solid var(--border);
+    width:44px;flex-shrink:0;display:flex;align-items:center;
+    justify-content:center;font-size:17px;
+    background:var(--green-pale);border-right:1px solid var(--border);
   }
-  .page-row-body{
-    flex:1;
-    padding:11px 14px;
-    min-width:0;
-  }
+  .page-row-body{flex:1;padding:10px 14px;min-width:0;}
   .page-row-title{
-    font-size:13.5px;
-    font-weight:600;
-    color:var(--ink);
-    margin-bottom:2px;
-    display:flex;
-    align-items:center;
-    gap:7px;
-    flex-wrap:wrap;
+    font-size:13px;font-weight:600;color:var(--ink);
+    margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
   }
-  .page-row-desc{
-    font-size:11.5px;
-    color:var(--muted);
-    line-height:1.55;
-  }
+  .page-row-desc{font-size:11.5px;color:var(--muted);line-height:1.55;}
   .page-row-right{
-    padding:0 14px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:4px;
-    flex-shrink:0;
+    padding:0 14px;display:flex;flex-direction:column;
+    align-items:flex-end;justify-content:center;gap:4px;flex-shrink:0;
   }
   .page-row-link{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    font-size:12px;
-    color:var(--white);
-    background:var(--green);
-    padding:6px 12px;
-    border-radius:3px;
-    text-decoration:none;
-    white-space:nowrap;
-    transition:background .12s;
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:12px;color:var(--white);background:var(--green);
+    padding:6px 12px;border-radius:3px;text-decoration:none;
+    white-space:nowrap;transition:background .12s;
   }
   .page-row-link:hover{background:var(--green-mid);}
-  .page-row-url{
-    font-size:10px;
-    color:var(--muted);
-    font-family:'SFMono-Regular',monospace;
-    white-space:nowrap;
-  }
+  .page-row-url{font-size:10px;color:var(--muted);font-family:'SFMono-Regular',monospace;white-space:nowrap;}
 
   /* Badge */
-  .badge{
-    font-size:10px;
-    padding:2px 6px;
-    border-radius:10px;
-    font-weight:600;
-    white-space:nowrap;
-  }
+  .badge{font-size:10px;padding:2px 6px;border-radius:10px;font-weight:600;white-space:nowrap;}
   .badge-ia   {background:#e0f0ea;color:#1a6644;}
   .badge-home {background:#e8eef8;color:#2a4a88;}
-  .badge-page {background:#f3ece0;color:#7a5020;}
-  .badge-wip  {background:#fef3c7;color:#92400e;}
+  .badge-room {background:#f3e8f0;color:#6a2060;}
+  .badge-movie{background:#fff0e0;color:#8a4800;}
   .badge-done {background:#dcfce7;color:#166534;}
+  .badge-wip  {background:#fef3c7;color:#92400e;}
 
-  /* Info box */
+  /* Infobox */
   .infobox{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-left:3px solid var(--green);
-    border-radius:var(--radius);
-    padding:12px 16px;
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.75;
-    margin-top:8px;
+    background:var(--white);border:1px solid var(--border);
+    border-left:3px solid var(--green);border-radius:var(--radius);
+    padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.75;margin-top:8px;
   }
   .infobox b{color:var(--green);}
 
-  /* Footer */
   footer{
-    text-align:center;
-    font-size:11px;
-    color:var(--muted);
-    padding:16px;
-    border-top:1px solid var(--border);
-    background:var(--white);
+    text-align:center;font-size:11px;color:var(--muted);
+    padding:16px;border-top:1px solid var(--border);background:var(--white);
   }
 
   @media(max-width:680px){
     aside{display:none;}
     main{padding:20px 16px 48px;}
     .page-row-right{display:none;}
-    .page-row-link-inline{
-      display:inline-flex;
-      margin-top:6px;
-    }
   }
 </style>
 </head>
 <body>
 
-<!-- Top bar -->
 <div class="topbar">
   <div class="topbar-title">
     翠紅苑 新サイト制作ポータル
@@ -273,21 +176,22 @@
 
 <div class="layout">
 
-  <!-- Sidebar nav -->
-  <aside id="sidebar">
+  <aside>
     <div class="nav-label">カテゴリー</div>
-    <a class="nav-item active" href="#ia" onclick="setActive(this)">🗺️ 情報設計</a>
-    <a class="nav-item" href="#home" onclick="setActive(this)">🏠 ホームページ</a>
-    <a class="nav-item" href="#subpage" onclick="setActive(this)">📄 下層ページ</a>
+    <a class="nav-item active" href="#ia">🗺️ 情報設計 <span class="nav-count">1</span></a>
+    <a class="nav-item" href="#home">🏠 ホームページ <span class="nav-count">3</span></a>
+    <a class="nav-item" href="#room">🛏️ 客室ページ <span class="nav-count">2</span></a>
+    <a class="nav-item" href="#movie">🎬 動画制作仕様書 <span class="nav-count">2</span></a>
+    <a class="nav-item" href="#subpage">📄 下層ページ <span class="nav-count">-</span></a>
 
-    <div class="nav-label" style="margin-top:8px;">ステータス</div>
-    <div style="padding:6px 18px;font-size:12px;color:var(--muted);line-height:1.9;">
-      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:5px;"></span>公開中<br>
-      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f59e0b;margin-right:5px;"></span>作業中
+    <div class="nav-divider"></div>
+    <div class="nav-label">ステータス凡例</div>
+    <div style="padding:4px 18px 8px;font-size:11.5px;color:var(--muted);line-height:2.1;">
+      <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#16a34a;margin-right:5px;"></span>公開中<br>
+      <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#f59e0b;margin-right:5px;"></span>作業中
     </div>
   </aside>
 
-  <!-- Main content -->
   <main>
 
     <!-- 情報設計 -->
@@ -297,7 +201,6 @@
         <span class="section-count">1ページ</span>
       </div>
       <div class="page-list">
-
         <div class="page-row">
           <div class="page-row-icon">🗺️</div>
           <div class="page-row-body">
@@ -313,7 +216,6 @@
             <div class="page-row-url">suikoen-sitemap.pages.dev</div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -324,7 +226,6 @@
         <span class="section-count">3ページ</span>
       </div>
       <div class="page-list">
-
         <div class="page-row">
           <div class="page-row-icon">🎬</div>
           <div class="page-row-body">
@@ -340,7 +241,6 @@
             <div class="page-row-url">suikoen-home.pages.dev</div>
           </div>
         </div>
-
         <div class="page-row">
           <div class="page-row-icon">🖼️</div>
           <div class="page-row-body">
@@ -356,7 +256,6 @@
             <div class="page-row-url">suikoen-home-2.pages.dev</div>
           </div>
         </div>
-
         <div class="page-row">
           <div class="page-row-icon">📋</div>
           <div class="page-row-body">
@@ -372,7 +271,86 @@
             <div class="page-row-url">suikoen-home-2-2.pages.dev</div>
           </div>
         </div>
+      </div>
+    </div>
 
+    <!-- 客室ページ -->
+    <div class="section" id="room">
+      <div class="section-header">
+        <h2>🛏️ 客室ページ構成案 / Room Page</h2>
+        <span class="section-count">2ページ</span>
+      </div>
+      <div class="page-list">
+        <div class="page-row">
+          <div class="page-row-icon">🛏️</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              構成案 1 — 大きな写真で見せる客室ページ
+              <span class="badge badge-room">客室案</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">特別室（家族風呂付き）・和室・洋室を掲載。羽衣ホテル様を参考に代表写真を横幅いっぱいに使用。茶香炉はインターネット予約限定特典として訴求。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-room.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-room.pages.dev</div>
+          </div>
+        </div>
+        <div class="page-row">
+          <div class="page-row-icon">🔄</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              構成案 2 — ジグザグレイアウト版
+              <span class="badge badge-room">客室案</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">トップページ構成案のジグザグ・ストーリーテリングに合わせて再構成。動画ヒーロー・間取り図（クリックで拡大）・定員での絞り込みを追加。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-room-2.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-room-2.pages.dev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 動画制作仕様書 -->
+    <div class="section" id="movie">
+      <div class="section-header">
+        <h2>🎬 動画制作仕様書 / Video Production Specs</h2>
+        <span class="section-count">2ページ</span>
+      </div>
+      <div class="page-list">
+        <div class="page-row">
+          <div class="page-row-icon">🎞️</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              ① ヒーロー背景ループ 制作仕様書
+              <span class="badge badge-movie">動画仕様</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">トップページ常時再生・音声なし15秒ループ。カット割り・演出メモ・サイズ仕様（デスクトップ／スマホ）を掲載。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-movie-1-1.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-movie-1-1.pages.dev</div>
+          </div>
+        </div>
+        <div class="page-row">
+          <div class="page-row-icon">🎥</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              ② ストーリー動画 制作仕様書
+              <span class="badge badge-movie">動画仕様</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">クリック起点・音声あり40秒。奥大井エリアの旅の体験から翠紅苑での体験までのカット割り・実撮影への体験表現を掲載。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-movie-1-2.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-movie-1-2.pages.dev</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -380,14 +358,13 @@
     <div class="section" id="subpage">
       <div class="section-header">
         <h2>📄 下層ページ / Sub Pages</h2>
-        <span class="section-count">0ページ（追加予定）</span>
+        <span class="section-count">追加予定</span>
       </div>
       <div class="infobox">
-        <b>準備中</b>　客室・料理・温泉・観光案内・アクセスなどの下層ページ構成案をここに追加していきます。
+        <b>準備中</b>　料理・温泉・観光案内・アクセスなどの下層ページ構成案をここに追加していきます。
       </div>
     </div>
 
-    <!-- 注記 -->
     <div class="infobox">
       <b>このポータルについて</b>　制作・確認用の作業リンク集です。ページが追加されるたびに更新します。各ページはCloudflare Pagesで公開中。本番サイトとは別環境です。
     </div>
@@ -398,24 +375,16 @@
 <footer>翠紅苑 新サイト制作プロジェクト &copy; 2025　｜　WordPress オリジナルテーマ</footer>
 
 <script>
-  function setActive(el) {
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    el.classList.add('active');
-  }
-
-  // Intersection observer でサイドバーのアクティブ状態を自動切替
   const sections = document.querySelectorAll('.section');
   const navItems = document.querySelectorAll('.nav-item');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.id;
-        navItems.forEach(n => {
-          n.classList.toggle('active', n.getAttribute('href') === '#' + id);
-        });
+        navItems.forEach(n => n.classList.toggle('active', n.getAttribute('href') === '#' + id));
       }
     });
-  }, { threshold: 0.3 });
+  }, { rootMargin:'-20% 0px -60% 0px' });
   sections.forEach(s => observer.observe(s));
 </script>
 
