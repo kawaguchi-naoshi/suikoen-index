@@ -3,349 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>翠紅苑 新サイト制作 — ページ一覧</title>
+<title>翠紅苑 制作ポータル</title>
 <style>
   :root {
-    --green: #2d5a3d;
-    --green-light: #e8f0eb;
-    --crimson: #8b1a2b;
-    --gold: #b8935a;
-    --ink: #1a1a1a;
-    --muted: #6b7280;
-    --border: #d9e2dc;
-    --bg: #f8faf8;
-    --white: #ffffff;
-    --radius: 6px;
+    --green:       #2d5a3d;
+    --green-mid:   #3d7a54;
+    --green-light: #eaf2ec;
+    --green-pale:  #f4f8f5;
+    --crimson:     #7a2020;
+    --ink:         #1a1a1a;
+    --muted:       #6b7280;
+    --border:      #dde5df;
+    --bg:          #f5f7f5;
+    --white:       #ffffff;
+    --radius:      5px;
+    --sidebar-w:   220px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ── Top bar ── */
+  .topbar{
+    background:var(--green);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    height:52px;
+    flex-shrink:0;
+  }
+  .topbar-title{
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.06em;
+  }
+  .topbar-title span{
+    font-size:11px;
+    font-weight:400;
+    opacity:.6;
+    margin-left:12px;
+    letter-spacing:0.08em;
+  }
+  .topbar-meta{font-size:11px;opacity:.55;}
 
-  body {
-    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Georgia', serif;
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
+  /* ── Layout ── */
+  .layout{
+    display:flex;
+    flex:1;
+    min-height:0;
   }
 
-  /* Header */
-  header {
-    background: var(--green);
-    color: var(--white);
-    padding: 40px 24px 32px;
-    text-align: center;
+  /* ── Sidebar ── */
+  aside{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    background:var(--white);
+    border-right:1px solid var(--border);
+    padding:20px 0;
+    position:sticky;
+    top:0;
+    height:calc(100vh - 52px);
+    overflow-y:auto;
+  }
+  .nav-label{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    color:var(--muted);
+    text-transform:uppercase;
+    padding:14px 18px 6px;
+  }
+  .nav-label:first-child{padding-top:4px;}
+  .nav-item{
+    display:block;
+    padding:9px 18px;
+    font-size:13px;
+    color:var(--ink);
+    text-decoration:none;
+    border-left:3px solid transparent;
+    transition:background .12s, border-color .12s;
+    cursor:pointer;
+  }
+  .nav-item:hover{background:var(--green-light);}
+  .nav-item.active{
+    background:var(--green-light);
+    border-left-color:var(--green);
+    color:var(--green);
+    font-weight:600;
   }
 
-  .header-label {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.6);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+  /* ── Main ── */
+  main{
+    flex:1;
+    padding:28px 32px 60px;
+    overflow-y:auto;
   }
 
-  header h1 {
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    line-height: 1.5;
-    color: var(--white);
+  /* Section */
+  .section{
+    margin-bottom:36px;
+    scroll-margin-top:20px;
+  }
+  .section-header{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--border);
+  }
+  .section-header h2{
+    font-size:14px;
+    font-weight:700;
+    color:var(--green);
+    letter-spacing:0.06em;
+  }
+  .section-count{
+    font-size:11px;
+    color:var(--muted);
   }
 
-  header h1 span {
-    display: block;
-    font-size: 13px;
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.12em;
-    margin-top: 6px;
-    font-weight: 400;
+  /* Page list */
+  .page-list{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
   }
-
-  .header-meta {
-    margin-top: 20px;
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.05em;
+  .page-row{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    display:flex;
+    align-items:center;
+    gap:0;
+    overflow:hidden;
+    transition:box-shadow .15s, border-color .15s;
   }
-
-  /* Main */
-  main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
+  .page-row:hover{
+    border-color:var(--green-mid);
+    box-shadow:0 2px 8px rgba(45,90,61,.1);
   }
-
-  /* Section heading */
-  .section-heading {
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--green);
-    text-transform: uppercase;
-    border-left: 3px solid var(--green);
-    padding-left: 10px;
-    margin-bottom: 16px;
-    margin-top: 40px;
+  .page-row-icon{
+    width:44px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    align-self:stretch;
+    background:var(--green-pale);
+    border-right:1px solid var(--border);
   }
-
-  .section-heading:first-of-type { margin-top: 0; }
-
-  /* Card */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 12px;
-    overflow: hidden;
-    transition: box-shadow 0.15s, border-color 0.15s;
+  .page-row-body{
+    flex:1;
+    padding:11px 14px;
+    min-width:0;
   }
-
-  .card:hover {
-    box-shadow: 0 4px 16px rgba(45, 90, 61, 0.1);
-    border-color: var(--green);
+  .page-row-title{
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:2px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
   }
-
-  .card a {
-    display: flex;
-    align-items: center;
-    padding: 18px 20px;
-    text-decoration: none;
-    gap: 16px;
+  .page-row-desc{
+    font-size:11.5px;
+    color:var(--muted);
+    line-height:1.55;
   }
-
-  .card-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    background: var(--green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 16px;
+  .page-row-right{
+    padding:0 14px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:4px;
+    flex-shrink:0;
   }
-
-  .card-body {
-    flex: 1;
-    min-width: 0;
+  .page-row-link{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:12px;
+    color:var(--white);
+    background:var(--green);
+    padding:6px 12px;
+    border-radius:3px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .12s;
   }
-
-  .card-title {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
+  .page-row-link:hover{background:var(--green-mid);}
+  .page-row-url{
+    font-size:10px;
+    color:var(--muted);
+    font-family:'SFMono-Regular',monospace;
+    white-space:nowrap;
   }
-
-  .card-desc {
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-    line-height: 1.5;
-  }
-
-  .card-url {
-    font-family: 'SFMono-Regular', 'Menlo', monospace;
-    font-size: 11px;
-    color: var(--green);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .card-arrow {
-    color: var(--border);
-    font-size: 14px;
-    margin-left: 4px;
-    flex-shrink: 0;
-    transition: color 0.15s;
-  }
-
-  .card:hover .card-arrow { color: var(--green); }
 
   /* Badge */
-  .badge {
-    display: inline-block;
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    padding: 2px 7px;
-    border-radius: 10px;
-    margin-right: 6px;
-    vertical-align: middle;
+  .badge{
+    font-size:10px;
+    padding:2px 6px;
+    border-radius:10px;
+    font-weight:600;
+    white-space:nowrap;
   }
-
-  .badge-wip {
-    background: #fef3c7;
-    color: #92400e;
-  }
-
-  .badge-review {
-    background: #dcfce7;
-    color: #166534;
-  }
+  .badge-ia   {background:#e0f0ea;color:#1a6644;}
+  .badge-home {background:#e8eef8;color:#2a4a88;}
+  .badge-page {background:#f3ece0;color:#7a5020;}
+  .badge-wip  {background:#fef3c7;color:#92400e;}
+  .badge-done {background:#dcfce7;color:#166534;}
 
   /* Info box */
-  .info-box {
-    background: var(--green-light);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--green);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-top: 40px;
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.7;
+  .infobox{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-left:3px solid var(--green);
+    border-radius:var(--radius);
+    padding:12px 16px;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.75;
+    margin-top:8px;
   }
-
-  .info-box strong {
-    color: var(--green);
-    font-weight: 600;
-  }
+  .infobox b{color:var(--green);}
 
   /* Footer */
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-    font-size: 11px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
+  footer{
+    text-align:center;
+    font-size:11px;
+    color:var(--muted);
+    padding:16px;
+    border-top:1px solid var(--border);
+    background:var(--white);
+  }
+
+  @media(max-width:680px){
+    aside{display:none;}
+    main{padding:20px 16px 48px;}
+    .page-row-right{display:none;}
+    .page-row-link-inline{
+      display:inline-flex;
+      margin-top:6px;
+    }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-label">Client Review Portal</div>
-  <h1>翠紅苑 新サイト制作
-    <span>Suikoen Website Redesign — Page Index</span>
-  </h1>
-  <div class="header-meta">制作担当: 川口直志 &nbsp;|&nbsp; WordPress + SWELL</div>
-</header>
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-title">
+    翠紅苑 新サイト制作ポータル
+    <span>Suikoen Website Redesign</span>
+  </div>
+  <div class="topbar-meta">WordPress オリジナルテーマ</div>
+</div>
 
-<main>
+<div class="layout">
 
-  <div class="section-heading">情報設計 / Information Architecture</div>
+  <!-- Sidebar nav -->
+  <aside id="sidebar">
+    <div class="nav-label">カテゴリー</div>
+    <a class="nav-item active" href="#ia" onclick="setActive(this)">🗺️ 情報設計</a>
+    <a class="nav-item" href="#home" onclick="setActive(this)">🏠 ホームページ</a>
+    <a class="nav-item" href="#subpage" onclick="setActive(this)">📄 下層ページ</a>
 
-  <div class="card">
-    <a href="https://suikoen-sitemap.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🗺️</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>サイトマップ（構成案）</div>
-        <div class="card-desc">全体のページ構成・ナビゲーション5項目・各ページの役割を可視化</div>
+    <div class="nav-label" style="margin-top:8px;">ステータス</div>
+    <div style="padding:6px 18px;font-size:12px;color:var(--muted);line-height:1.9;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:5px;"></span>公開中<br>
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f59e0b;margin-right:5px;"></span>作業中
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main>
+
+    <!-- 情報設計 -->
+    <div class="section" id="ia">
+      <div class="section-header">
+        <h2>🗺️ 情報設計 / Information Architecture</h2>
+        <span class="section-count">1ページ</span>
       </div>
-      <div class="card-url">suikoen-sitemap.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+      <div class="page-list">
 
-  <div class="section-heading">ホームページ構成案 / Homepage Proposals</div>
+        <div class="page-row">
+          <div class="page-row-icon">🗺️</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              サイトマップ（構成案）
+              <span class="badge badge-ia">情報設計</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">全体のページ構成・ナビゲーション5項目・各ページの役割を可視化</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-sitemap.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-sitemap.pages.dev</div>
+          </div>
+        </div>
 
-  <div class="card">
-    <a href="https://suikoen-home.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🎬</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 1 — 動画スライダー型ヒーロー</div>
-        <div class="card-desc">夢のつり橋・奥大井湖上駅・温泉の3動画を自動切替。5つの魅力は3カラムカード。</div>
       </div>
-      <div class="card-url">suikoen-home.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+    </div>
 
-  <div class="card">
-    <a href="https://suikoen-home-2.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🖼️</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 2 — フルブリード写真型ヒーロー</div>
-        <div class="card-desc">静止画1枚でインパクト。5つの魅力はジグザグ交互レイアウト。観光セクションを上位に配置。</div>
+    <!-- ホームページ -->
+    <div class="section" id="home">
+      <div class="section-header">
+        <h2>🏠 ホームページ構成案 / Homepage</h2>
+        <span class="section-count">3ページ</span>
       </div>
-      <div class="card-url">suikoen-home-2.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+      <div class="page-list">
 
-  <div class="card">
-    <a href="https://suikoen-home-2-2.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">📋</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 3 — 全要素搭載版（構成案2ベース）</div>
-        <div class="card-desc">構成案2をベースに、交通情報バー・天気予報・Instagram・モデルコース（晴れ／雨）・日帰り導線・お知らせ・ストリートビューを全て搭載。クライアントとの相談で取捨選択する想定。</div>
+        <div class="page-row">
+          <div class="page-row-icon">🎬</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              構成案 1 — 動画スライダー型ヒーロー
+              <span class="badge badge-home">HP案</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">夢のつり橋・奥大井湖上駅・温泉の3動画を自動切替。5つの魅力は3カラムカード。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-home.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-home.pages.dev</div>
+          </div>
+        </div>
+
+        <div class="page-row">
+          <div class="page-row-icon">🖼️</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              構成案 2 — フルブリード写真型ヒーロー
+              <span class="badge badge-home">HP案</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">静止画1枚でインパクト。5つの魅力はジグザグ交互レイアウト。観光セクションを上位に配置。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-home-2.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-home-2.pages.dev</div>
+          </div>
+        </div>
+
+        <div class="page-row">
+          <div class="page-row-icon">📋</div>
+          <div class="page-row-body">
+            <div class="page-row-title">
+              構成案 3 — 全要素搭載版（構成案2ベース）
+              <span class="badge badge-home">HP案</span>
+              <span class="badge badge-done">● 公開中</span>
+            </div>
+            <div class="page-row-desc">交通情報バー・天気予報・Instagram・モデルコース・日帰り導線・お知らせ・ストリートビューを全搭載。取捨選択の素材として。</div>
+          </div>
+          <div class="page-row-right">
+            <a class="page-row-link" href="https://suikoen-home-2-2.pages.dev/" target="_blank" rel="noopener">開く ›</a>
+            <div class="page-row-url">suikoen-home-2-2.pages.dev</div>
+          </div>
+        </div>
+
       </div>
-      <div class="card-url">suikoen-home-2-2.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+    </div>
 
-  <div class="section-heading">客室ページ構成案 / Room Page Proposal</div>
-
-  <div class="card">
-    <a href="https://suikoen-room.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🛏️</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 1 — 大きな写真で見せる客室ページ</div>
-        <div class="card-desc">特別室（家族風呂付き）・和室・洋室を掲載。羽衣ホテル様を参考に代表写真を横幅いっぱいに使用。茶香炉はインターネット予約限定特典として訴求。</div>
+    <!-- 下層ページ -->
+    <div class="section" id="subpage">
+      <div class="section-header">
+        <h2>📄 下層ページ / Sub Pages</h2>
+        <span class="section-count">0ページ（追加予定）</span>
       </div>
-      <div class="card-url">suikoen-room.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
-
-  <div class="card">
-    <a href="https://suikoen-room-2.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🧭</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>構成案 2 — ジグザグレイアウト版</div>
-        <div class="card-desc">トップページ構成案のジグザグ・ストーリーテリングに合わせて再構成。動画ヒーロー・間取り図（クリックで拡大）・定員での絞り込みを追加。</div>
+      <div class="infobox">
+        <b>準備中</b>　客室・料理・温泉・観光案内・アクセスなどの下層ページ構成案をここに追加していきます。
       </div>
-      <div class="card-url">suikoen-room-2.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+    </div>
 
-  <div class="section-heading">動画制作仕様書 / Video Production Specs</div>
+    <!-- 注記 -->
+    <div class="infobox">
+      <b>このポータルについて</b>　制作・確認用の作業リンク集です。ページが追加されるたびに更新します。各ページはCloudflare Pagesで公開中。本番サイトとは別環境です。
+    </div>
 
-  <div class="card">
-    <a href="https://suikoen-movie-1-1.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🎞️</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>①ヒーロー背景ループ 制作仕様書</div>
-        <div class="card-desc">トップページ常時再生・音声なし15秒ループ。カット割り・演出メモ・サイズ仕様（デスクトップ／スマホ）を掲載。</div>
-      </div>
-      <div class="card-url">suikoen-movie-1-1.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+  </main>
+</div>
 
-  <div class="card">
-    <a href="https://suikoen-movie-1-2.pages.dev/" target="_blank" rel="noopener">
-      <div class="card-icon">🎬</div>
-      <div class="card-body">
-        <div class="card-title"><span class="badge badge-review">確認用</span>②ストーリー動画 制作仕様書</div>
-        <div class="card-desc">クリック起点・音声あり40秒。奥大井エリアの旅の体験から翠紅苑での体験までのカット割りと、実装側への依頼事項を掲載。</div>
-      </div>
-      <div class="card-url">suikoen-movie-1-2.pages.dev</div>
-      <div class="card-arrow">›</div>
-    </a>
-  </div>
+<footer>翠紅苑 新サイト制作プロジェクト &copy; 2025　｜　WordPress オリジナルテーマ</footer>
 
-  <div class="info-box">
-    <strong>このページについて</strong><br>
-    制作・確認用の作業リンク集です。今後ページが追加されるたびに更新します。<br>
-    各ページはCloudflare Pagesで公開中。本番サイトとは別環境です。
-  </div>
+<script>
+  function setActive(el) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+  }
 
-</main>
-
-<footer>
-  翠紅苑 新サイト制作プロジェクト &copy; 2025
-</footer>
+  // Intersection observer でサイドバーのアクティブ状態を自動切替
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
